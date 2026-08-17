@@ -1,5 +1,7 @@
 package com.wgw.controller;
 
+import com.wgw.advisor.SGAdvisor1;
+import com.wgw.advisor.SGAdvisor2;
 import com.wgw.model.Book;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.messages.SystemMessage;
@@ -80,6 +82,22 @@ public class ZhipuChatClientController {
                 .user(query)
                 .options(chatOptions)
                 .stream().content();
+    }
+
+    @GetMapping("/testAdvisor")
+    public Book testAdvisor() {
+        ZhiPuAiChatOptions chatOptions = ZhiPuAiChatOptions.builder()
+                .model("glm-4.6")
+                .temperature(0.0)
+                .maxTokens(15536)
+                .build();
+
+        return chatClient.prompt()
+                .user("给我随机生成一本书，要求书名和作者都是中文")
+                .options(chatOptions)
+                .advisors(new SGAdvisor1(), new SGAdvisor2())
+                .call()
+                .entity(Book.class);
     }
 
 }

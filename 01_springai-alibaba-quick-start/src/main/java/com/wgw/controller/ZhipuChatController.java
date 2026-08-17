@@ -67,14 +67,8 @@ public class ZhipuChatController {
     }
 
     @GetMapping("/stream")
-    public Flux<ChatResponse> stream(@RequestParam(name = "query") String query) {
-        ZhiPuAiChatOptions chatOptions = new ZhiPuAiChatOptions();
-        chatOptions.setModel("glm-4.6"); //设置模型
-        SystemMessage systemMessage = new SystemMessage("你是一个ai助手");
-        UserMessage userMessage = new UserMessage(query);
-        //构建prompt
-        Prompt prompt = new Prompt(List.of(systemMessage, userMessage), chatOptions);
-        return chatModel.stream(prompt);
+    public Flux<String> stream(@RequestParam(name = "query") String query) {
+        return chatModel.stream(query);
     }
 
 }

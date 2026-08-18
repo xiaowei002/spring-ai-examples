@@ -27,6 +27,6 @@ public class SGAdvisor1 implements CallAdvisor {
 
     @Override
     public int getOrder() {
-        return 3;
+        return 0;
     }
 }

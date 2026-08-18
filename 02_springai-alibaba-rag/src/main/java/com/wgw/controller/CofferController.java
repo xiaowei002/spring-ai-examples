@@ -1,5 +1,6 @@
 package com.wgw.controller;
 
+import com.wgw.tool.TimeTools;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -32,7 +33,7 @@ public class CofferController {
 
     public CofferController(VectorStore vectorStore, ChatClient.Builder builder) {
         VectorStoreDocumentRetriever documentRetriever = VectorStoreDocumentRetriever.builder()
-                .topK(3)
+                .topK(1)
                 .similarityThreshold(0.5)
                 .vectorStore(vectorStore)
                 .build();
@@ -46,6 +47,7 @@ public class CofferController {
 
         this.chatClient = builder
                 .defaultAdvisors(retrievalAugmentationAdvisor)
+                .defaultTools(new TimeTools())
                 .build();
     }
 

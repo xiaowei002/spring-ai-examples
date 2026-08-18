@@ -40,8 +40,8 @@ public class RagController {
 
         SearchRequest searchRequest = SearchRequest.builder()
                 .query(query)
-                .topK(10)
-                .similarityThreshold(0.8)
+                .topK(3)
+//                .similarityThreshold(0.8)
                 .build();
 
         return vectorStore.similaritySearch(searchRequest);

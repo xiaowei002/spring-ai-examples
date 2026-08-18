@@ -1,0 +1,30 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: sangeng-redis-rag
+  ai:
+    zhipuai:
+      api-key: ${ZHIPU_KEY}
+      chat:
+        options:
+          model: glm-4.6 # 模型
+      # 向量嵌入配置
+      embedding:
+        options:
+          model: embedding-3  # 使用的嵌入模型名称
+          dimensions: 256     # 嵌入向量的维度
+
+    # 向量存储配置
+    vectorstore:
+      redis:
+        initialize-schema: true     # 启动时自动创建Redis 向量索引结构
+        prefix: sangeng_rag_prefix  # Redis 键名前缀，用于区分不通应用的向量数据
+        index: sangeng_rag_index    # Redis 向量索引名称
+
+  # 数据源配置
+  data:
+    redis:
+      host: localhost # redis 服务地址
+      port: 6379      # redis 服务端口

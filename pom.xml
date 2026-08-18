@@ -11,6 +11,7 @@
     <url>http://maven.apache.org</url>
     <modules>
         <module>01_springai-alibaba-quick-start</module>
+        <module>02_springai-alibaba-rag</module>
     </modules>
 
     <properties>

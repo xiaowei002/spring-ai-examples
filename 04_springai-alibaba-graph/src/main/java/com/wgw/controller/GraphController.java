@@ -20,13 +20,16 @@ public class GraphController {
     private final CompiledGraph graph;
     private final CompiledGraph simpleGraph;
     private final CompiledGraph conditionGraph;
+    private final CompiledGraph loopGraph;
 
     public GraphController(@Qualifier("quickStartGraph") CompiledGraph graph,
                            @Qualifier("simpleGraph") CompiledGraph simpleGraph,
-                           @Qualifier("conditionGraph") CompiledGraph conditionGraph) {
+                           @Qualifier("conditionGraph") CompiledGraph conditionGraph,
+                           @Qualifier("loopGraph") CompiledGraph loopGraph) {
         this.graph = graph;
         this.simpleGraph = simpleGraph;
         this.conditionGraph = conditionGraph;
+        this.loopGraph = loopGraph;
     }
 
     @GetMapping("/input")
@@ -45,6 +48,12 @@ public class GraphController {
     @GetMapping("conditionGraph")
     public Map<String, Object> conditionGraph(@RequestParam("topic") String topic) {
         Optional<OverAllState> call = conditionGraph.call(Map.of("topic", topic));
+        return call.map(OverAllState::data).get();
+    }
+
+    @GetMapping("loopGraph")
+    public Map<String, Object> loopGraph(@RequestParam("topic") String topic) {
+        Optional<OverAllState> call = loopGraph.call(Map.of("topic", topic));
         return call.map(OverAllState::data).get();
     }
 }

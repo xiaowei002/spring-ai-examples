@@ -4,8 +4,6 @@ server:
 spring:
   application:
     name: sangeng-graph
-
-
   ai:
     zhipuai:
       api-key: ${ZHIPU_KEY}
@@ -14,5 +12,5 @@ spring:
           model: glm-4.6 #模型
   http:
     client:
-      connect-timeout: 10s
+      connect-timeout: 20s
       read-timeout: 120s

@@ -23,6 +23,8 @@ spring:
           connections:
             server1:
               url: http://localhost:8080  # mcp服务url
+            fetcher-mcp:
+              url: http://localhost:3000  #网页抓取mcp服务url
 
     # 向量存储配置
     vectorstore:

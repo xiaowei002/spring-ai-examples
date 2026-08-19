@@ -102,4 +102,14 @@ public class CofferController {
                 .call()
                 .content();
     }
+
+    @GetMapping("/fetcher")
+    public String fetcher(@RequestParam(name = "query") String query) {
+        return chatClient
+                .prompt()
+                .system("你是一个网页爬取专家，善于将爬取的数据总结")
+                .user(query)
+                .call()
+                .content();
+    }
 }

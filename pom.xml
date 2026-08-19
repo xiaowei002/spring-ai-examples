@@ -12,6 +12,7 @@
     <modules>
         <module>01_springai-alibaba-quick-start</module>
         <module>02_springai-alibaba-rag</module>
+        <module>03_springai-alibaba-mcp</module>
     </modules>
 
     <properties>

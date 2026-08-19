@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8888
 
 spring:
   application:
@@ -15,6 +15,14 @@ spring:
         options:
           model: embedding-3  # 使用的嵌入模型名称
           dimensions: 256     # 嵌入向量的维度
+
+    # mcp 配置
+    mcp:
+      client:
+        sse:
+          connections:
+            server1:
+              url: http://localhost:8080  # mcp服务url
 
     # 向量存储配置
     vectorstore:

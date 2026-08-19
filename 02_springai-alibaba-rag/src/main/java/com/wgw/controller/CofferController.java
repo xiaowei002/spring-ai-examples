@@ -10,6 +10,7 @@ import org.springframework.ai.document.Document;
 import org.springframework.ai.rag.advisor.RetrievalAugmentationAdvisor;
 import org.springframework.ai.rag.retrieval.search.DocumentRetriever;
 import org.springframework.ai.rag.retrieval.search.VectorStoreDocumentRetriever;
+import org.springframework.ai.tool.ToolCallbackProvider;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +32,7 @@ public class CofferController {
 
     private final ChatClient chatClient;
 
-    public CofferController(VectorStore vectorStore, ChatClient.Builder builder) {
+    public CofferController(VectorStore vectorStore, ChatClient.Builder builder, ToolCallbackProvider toolCallbackProvider) {
         VectorStoreDocumentRetriever documentRetriever = VectorStoreDocumentRetriever.builder()
                 .topK(1)
                 .similarityThreshold(0.5)
@@ -47,7 +48,9 @@ public class CofferController {
 
         this.chatClient = builder
                 .defaultAdvisors(retrievalAugmentationAdvisor)
-                .defaultTools(new TimeTools())
+//                .defaultTools(new TimeTools())
+                // mcp 使用
+                .defaultToolCallbacks(toolCallbackProvider.getToolCallbacks())
                 .build();
     }
 

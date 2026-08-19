@@ -5,9 +5,14 @@ spring:
   application:
     name: sangeng-graph
 
+
   ai:
     zhipuai:
       api-key: ${ZHIPU_KEY}
       chat:
         options:
           model: glm-4.6 #模型
+  http:
+    client:
+      connect-timeout: 10s
+      read-timeout: 120s
